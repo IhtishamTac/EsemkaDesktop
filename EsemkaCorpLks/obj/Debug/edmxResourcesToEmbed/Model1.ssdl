@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EsemkaCorporationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="department">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="abbreviation" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="deleted_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="employee">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="phone_number" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="hire_date" Type="datetime" Nullable="false" />
+    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="deleted_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="job">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="department_id" Type="int" Nullable="false" />
+    <Property Name="job_level_id" Type="int" Nullable="false" />
+    <Property Name="supervisor_job_id" Type="int" />
+    <Property Name="name" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="head_count" Type="int" Nullable="false" />
+    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="deleted_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="job_level">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="deleted_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="mutation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="job_id" Type="int" Nullable="false" />
+    <Property Name="employee_id" Type="int" Nullable="false" />
+    <Property Name="status" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="deleted_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="position">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="job_id" Type="int" Nullable="false" />
+    <Property Name="employee_id" Type="int" Nullable="false" />
+    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="deleted_at" Type="datetime" />
+  </EntityType>
+  <EntityType Name="promotion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="job_id" Type="int" Nullable="false" />
+    <Property Name="employee_id" Type="int" Nullable="false" />
+    <Property Name="status" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="deleted_at" Type="datetime" />
+  </EntityType>
+  <Association Name="FK__job__department___2B3F6F97">
+    <End Role="department" Type="Self.department" Multiplicity="1" />
+    <End Role="job" Type="Self.job" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="job">
+        <PropertyRef Name="department_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__job__job_level_i__2C3393D0">
+    <End Role="job_level" Type="Self.job_level" Multiplicity="1" />
+    <End Role="job" Type="Self.job" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="job_level">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="job">
+        <PropertyRef Name="job_level_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__job__supervisor___2D27B809">
+    <End Role="job" Type="Self.job" Multiplicity="0..1" />
+    <End Role="job1" Type="Self.job" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="job">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="job1">
+        <PropertyRef Name="supervisor_job_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__mutation__employ__3A81B327">
+    <End Role="employee" Type="Self.employee" Multiplicity="1" />
+    <End Role="mutation" Type="Self.mutation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="mutation">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__mutation__job_id__398D8EEE">
+    <End Role="job" Type="Self.job" Multiplicity="1" />
+    <End Role="mutation" Type="Self.mutation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="job">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="mutation">
+        <PropertyRef Name="job_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__position__employ__35BCFE0A">
+    <End Role="employee" Type="Self.employee" Multiplicity="1" />
+    <End Role="position" Type="Self.position" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="position">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__position__job_id__34C8D9D1">
+    <End Role="job" Type="Self.job" Multiplicity="1" />
+    <End Role="position" Type="Self.position" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="job">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="position">
+        <PropertyRef Name="job_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__promotion__emplo__3F466844">
+    <End Role="employee" Type="Self.employee" Multiplicity="1" />
+    <End Role="promotion" Type="Self.promotion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="promotion">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__promotion__job_i__3E52440B">
+    <End Role="job" Type="Self.job" Multiplicity="1" />
+    <End Role="promotion" Type="Self.promotion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="job">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="promotion">
+        <PropertyRef Name="job_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EsemkaCorporationModelStoreContainer">
+    <EntitySet Name="department" EntityType="Self.department" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="employee" EntityType="Self.employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="job" EntityType="Self.job" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="job_level" EntityType="Self.job_level" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="mutation" EntityType="Self.mutation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="position" EntityType="Self.position" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="promotion" EntityType="Self.promotion" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__job__department___2B3F6F97" Association="Self.FK__job__department___2B3F6F97">
+      <End Role="department" EntitySet="department" />
+      <End Role="job" EntitySet="job" />
+    </AssociationSet>
+    <AssociationSet Name="FK__job__job_level_i__2C3393D0" Association="Self.FK__job__job_level_i__2C3393D0">
+      <End Role="job_level" EntitySet="job_level" />
+      <End Role="job" EntitySet="job" />
+    </AssociationSet>
+    <AssociationSet Name="FK__job__supervisor___2D27B809" Association="Self.FK__job__supervisor___2D27B809">
+      <End Role="job" EntitySet="job" />
+      <End Role="job1" EntitySet="job" />
+    </AssociationSet>
+    <AssociationSet Name="FK__mutation__employ__3A81B327" Association="Self.FK__mutation__employ__3A81B327">
+      <End Role="employee" EntitySet="employee" />
+      <End Role="mutation" EntitySet="mutation" />
+    </AssociationSet>
+    <AssociationSet Name="FK__mutation__job_id__398D8EEE" Association="Self.FK__mutation__job_id__398D8EEE">
+      <End Role="job" EntitySet="job" />
+      <End Role="mutation" EntitySet="mutation" />
+    </AssociationSet>
+    <AssociationSet Name="FK__position__employ__35BCFE0A" Association="Self.FK__position__employ__35BCFE0A">
+      <End Role="employee" EntitySet="employee" />
+      <End Role="position" EntitySet="position" />
+    </AssociationSet>
+    <AssociationSet Name="FK__position__job_id__34C8D9D1" Association="Self.FK__position__job_id__34C8D9D1">
+      <End Role="job" EntitySet="job" />
+      <End Role="position" EntitySet="position" />
+    </AssociationSet>
+    <AssociationSet Name="FK__promotion__emplo__3F466844" Association="Self.FK__promotion__emplo__3F466844">
+      <End Role="employee" EntitySet="employee" />
+      <End Role="promotion" EntitySet="promotion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__promotion__job_i__3E52440B" Association="Self.FK__promotion__job_i__3E52440B">
+      <End Role="job" EntitySet="job" />
+      <End Role="promotion" EntitySet="promotion" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

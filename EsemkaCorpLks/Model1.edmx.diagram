@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e214ccbc802140cda8ebebe54a7c1df8" Name="Diagram1">
+        <EntityTypeShape EntityType="EsemkaCorporationModel.department" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EsemkaCorporationModel.employee" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EsemkaCorporationModel.job" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EsemkaCorporationModel.job_level" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="EsemkaCorporationModel.mutation" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EsemkaCorporationModel.position" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EsemkaCorporationModel.promotion" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="EsemkaCorporationModel.FK__job__department___2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="EsemkaCorporationModel.FK__mutation__employ__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="EsemkaCorporationModel.FK__position__employ__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="EsemkaCorporationModel.FK__promotion__emplo__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="EsemkaCorporationModel.FK__job__job_level_i__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="EsemkaCorporationModel.FK__job__supervisor___2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="EsemkaCorporationModel.FK__mutation__job_id__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="EsemkaCorporationModel.FK__position__job_id__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="EsemkaCorporationModel.FK__promotion__job_i__3E52440B" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
